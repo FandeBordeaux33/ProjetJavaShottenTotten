@@ -1,10 +1,6 @@
-package com.schottenTotten.model;
+package model;
 
-/**
- * Représente une carte du jeu (conforme au diagramme de classe).
- */
 public class Carte {
-    // Attributs privés (Encapsulation)
     private int numero;  // Valeur de 1 à 9 (ou 0 pour un Joker tactique)
     private int couleur; // Couleur de 1 à 6 (ou 0 pour une carte Tactique)
 
@@ -14,7 +10,6 @@ public class Carte {
         this.couleur = couleur;
     }
 
-    // Getters pour récupérer les valeurs (comme sur ton diagramme)
     public int getCouleur() {
         return this.couleur;
     }
@@ -32,4 +27,5 @@ public class Carte {
         String[] nomsCouleurs = {"", "Rouge", "Bleu", "Vert", "Jaune", "Violet", "Marron"};
         return "[" + this.numero + " " + nomsCouleurs[this.couleur] + "]";
     }
+
 }
