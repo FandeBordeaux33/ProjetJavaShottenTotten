@@ -1,4 +1,4 @@
-package model;
+package com.schottentotten.model;
 
 public class Carte {
     private int numero;  // Valeur de 1 à 9 (ou 0 pour un Joker tactique)

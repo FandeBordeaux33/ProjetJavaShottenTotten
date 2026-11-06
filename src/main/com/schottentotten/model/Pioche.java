@@ -1,4 +1,4 @@
-package model;
+package com.schottentotten.model;
 
 import java.util.Random;
 
@@ -6,18 +6,17 @@ public class Pioche {
     private int cartes_restantes;
     private Carte[] cartes;
 
-    public Pioche(boolean varianteTactique) {
-        int tailleMax = varianteTactique ? 56 : 54;
-        this.cartes = new Carte[tailleMax];
+    public Pioche() {
+        this.cartes = new Carte[54];                                        //Tout est dans le package model
         this.cartes_restantes = 0;
 
-        // Création des 54 cartes classiques : 6 couleurs (1 à 6) et 9 numéros (1 à 9)
+        // Création des cartes
         for (int c = 1; c <= 6; c++) {
             for (int n = 1; n <= 9; n++) {
                 this.cartes[this.cartes_restantes] = new Carte(n, c);
-                this.cartes_restantes++;
+                this.cartes_restantes++;                                        
             }
-        }
+        }                                                                   //incrémente d'une carte donc à la fin de la boucle, this.cartes_restantes = 54
         melangerCarte();
     }
 
@@ -25,7 +24,7 @@ public class Pioche {
     public void melangerCarte() {
         Random rand = new Random();                                         //créer un objet de type Random
         for (int i = 0; i < this.cartes_restantes; i++) {
-            int indexAleatoire = rand.nextInt(this.cartes_restantes);       //donc numéro de 0 à 51
+            int indexAleatoire = rand.nextInt(this.cartes_restantes);       //donc numéro de 0 à 53 (54 valeurs)
             // On échange la carte i avec une carte choisie au hasard
             Carte temp = this.cartes[i];
             this.cartes[i] = this.cartes[indexAleatoire];
@@ -33,39 +32,31 @@ public class Pioche {
         }
     }
 
-    // Retire et renvoie la carte du dessus de la pioche
-    public Carte tirerUneCarte() {
+    public Carte tirerUneCarte() {                                          
         if (this.cartes_restantes <= 0) {
-            return null; // Plus de cartes dans la pioche !
+            return null; 
         }
-        this.cartes_restantes--;
+        this.cartes_restantes--;                                    //enleve une carte
         Carte carteTiree = this.cartes[this.cartes_restantes];
-        this.cartes[this.cartes_restantes] = null;
+        this.cartes[this.cartes_restantes] = null;                  //la carte d'indice "this.cartes_restantes" devient null
         return carteTiree;
     }
 
-    public int getCarteRestantes() {
+    public int getCarteRestantes() {                    //avoir le nombre de carte restante
         return this.cartes_restantes;
     }
 
+    public boolean estVide() {                          //true s'il n'y a plus de carte
+        return this.cartes_restantes == 0;
+    }
 
     @Override
-    public String toString() {
+    public String toString() {                                  //affichage propre de la carte
         String resultat = "";
         for (int i = 0; i < this.cartes_restantes; i++) {
             resultat += this.cartes[i] + "\n";
         }
         return resultat;
     }
-}
-    
-class TestPioche {
-        public static void main(String[] args) {
-            Pioche pioche = new Pioche(false);
-            System.out.println(pioche);
-            
-            Carte carte1 = new Carte(5, 2);
-            System.out.println(carte1);
-        }
 }
     
